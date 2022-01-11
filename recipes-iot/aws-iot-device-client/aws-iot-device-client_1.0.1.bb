@@ -6,7 +6,7 @@ PROVIDES += "aws/aws-iot-device-client"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3eb31626add6ada64ff9ac772bd3c653"
 
 BRANCH ?= "main"
-SRC_URI = "git://github.com/awslabs/aws-iot-device-client.git;branch=${BRANCH};bareclone=0"
+SRC_URI = "git://github.com/awslabs/aws-iot-device-client.git;protocol=https;branch=${BRANCH};bareclone=0"
 SRCREV = "16b73b81da29149581a433cf7b6e69fcdd11176a"
 
 S= "${WORKDIR}/git"
@@ -30,7 +30,7 @@ do_install() {
                   ${D}${systemd_system_unitdir}/aws-iot-device-client.service
   install -m 0644 ${S}/config-template.json \
                   ${D}${sysconfdir}/aws-iot-device-client.json
-  
+
   sed -i -e "s,/sbin/aws-iot-device-client,/sbin/aws-iot-device-client --config /etc/aws-iot-device-client.json,g" \
     ${D}${systemd_system_unitdir}/aws-iot-device-client.service
 }
